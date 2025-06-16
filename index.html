@@ -5,103 +5,1075 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ada Huang | Real Estate Development Portfolio</title>
   <style>
-    body { font-family: 'Segoe UI', sans-serif; margin: 0; color: #222; background: #f9f9f9; }
-    header, nav, footer { background: #0B3D91; color: white; padding: 1.5em; }
-    nav a { color: white; margin: 0 1.5em; text-decoration: none; font-weight: 600; }
-    nav a:hover { text-decoration: underline; }
-    section { padding: 3em 2em; max-width: 1000px; margin: auto; background: #fff; margin-bottom: 2em; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.05); }
-    h1 { color: #fff; font-size: 2.2em; margin-bottom: 0.2em; }
-    h2 { color: #0B3D91; margin-top: 0; }
-    h3 { color: #2a2a2a; }
-    .project { margin-bottom: 2.5em; border-left: 5px solid #0B3D91; padding-left: 1.5em; }
-    footer { text-align: center; font-size: 0.9em; margin-top: 2em; }
-    a { color: #0B3D91; }
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+    
+    :root {
+      --primary-blue: #1e3a8a;
+      --secondary-blue: #3b82f6;
+      --accent-blue: #60a5fa;
+      --light-blue: #dbeafe;
+      --dark-gray: #1f2937;
+      --medium-gray: #374151;
+      --light-gray: #64748b;
+      --background-light: #f8fafc;
+      --white: #ffffff;
+      --border-color: #e2e8f0;
+      --success-green: #10b981;
+      --warning-orange: #f59e0b;
+      --gradient-primary: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+      --gradient-secondary: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+      --gradient-background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+      --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+      color: var(--dark-gray);
+      background: var(--gradient-background);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Floating particles background */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: var(--accent-blue);
+      border-radius: 50%;
+      opacity: 0.3;
+      animation: float 20s infinite linear;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0deg); }
+      100% { transform: translateY(-100px) rotate(360deg); }
+    }
+
+    /* Enhanced Header */
+    header {
+      background: var(--gradient-primary);
+      color: var(--white);
+      padding: 5rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255,255,255,0.1) 0%, transparent 50%);
+    }
+
+    header .content {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .profile-section {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3rem;
+      margin-bottom: 3rem;
+      animation: slideInFromTop 1s ease-out;
+    }
+
+    .profile-image {
+      width: 140px;
+      height: 140px;
+      background: var(--gradient-secondary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: var(--white);
+      border: 5px solid rgba(255,255,255,0.2);
+      box-shadow: var(--shadow-2xl);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s ease;
+    }
+
+    .profile-image:hover {
+      transform: scale(1.05) rotate(5deg);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+    }
+
+    .profile-image::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+      transform: rotate(45deg);
+      animation: shimmer 3s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+      100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+    }
+
+    h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.025em;
+      background: linear-gradient(135deg, #fff 0%, #e0e7ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: slideInFromRight 1s ease-out 0.2s both;
+    }
+
+    .subtitle {
+      font-size: 1.3rem;
+      opacity: 0.9;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+      animation: slideInFromRight 1s ease-out 0.4s both;
+    }
+
+    .header-description {
+      font-size: 1.2rem;
+      opacity: 0.85;
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.8;
+      animation: slideInFromBottom 1s ease-out 0.6s both;
+    }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--white);
+      opacity: 0.7;
+      animation: bounce 2s infinite;
+      cursor: pointer;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+      40% { transform: translateX(-50%) translateY(-10px); }
+      60% { transform: translateX(-50%) translateY(-5px); }
+    }
+
+    /* Enhanced Navigation */
+    nav {
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(20px);
+      padding: 1.2rem 2rem;
+      box-shadow: var(--shadow-lg);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      transition: all 0.3s ease;
+    }
+
+    nav.scrolled {
+      background: rgba(255,255,255,0.98);
+      box-shadow: var(--shadow-xl);
+    }
+
+    nav .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    nav a {
+      color: var(--medium-gray);
+      text-decoration: none;
+      font-weight: 600;
+      padding: 0.8rem 1.5rem;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    nav a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: var(--gradient-primary);
+      transition: all 0.3s ease;
+      z-index: -1;
+    }
+
+    nav a:hover {
+      color: var(--white);
+      transform: translateY(-2px);
+    }
+
+    nav a:hover::before {
+      left: 0;
+    }
+
+    nav a.active {
+      background: var(--gradient-primary);
+      color: var(--white);
+    }
+
+    /* Enhanced Main Content */
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    section {
+      background: var(--white);
+      margin-bottom: 4rem;
+      border-radius: 24px;
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      transition: all 0.4s ease;
+      opacity: 0;
+      transform: translateY(50px);
+      position: relative;
+    }
+
+    section.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    section:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-2xl);
+    }
+
+    section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--gradient-primary);
+    }
+
+    .section-header {
+      background: linear-gradient(135deg, var(--background-light) 0%, #f1f5f9 100%);
+      padding: 3rem 2rem 2rem;
+      border-bottom: 1px solid var(--border-color);
+      position: relative;
+    }
+
+    .section-content {
+      padding: 3rem 2rem;
+    }
+
+    h2 {
+      color: var(--primary-blue);
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .section-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--gradient-primary);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 1.5rem;
+    }
+
+    .section-subtitle {
+      color: var(--light-gray);
+      font-size: 1.1rem;
+      margin: 0;
+      font-weight: 500;
+    }
+
+    /* Enhanced Project Cards */
+    .project {
+      background: linear-gradient(135deg, var(--background-light) 0%, #f8fafc 100%);
+      border-radius: 20px;
+      padding: 2.5rem;
+      margin-bottom: 2.5rem;
+      border: 1px solid var(--border-color);
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 6px;
+      background: var(--gradient-primary);
+      transform: scaleY(0);
+      transition: transform 0.3s ease;
+    }
+
+    .project:hover::before {
+      transform: scaleY(1);
+    }
+
+    .project:hover {
+      transform: translateX(12px);
+      box-shadow: var(--shadow-xl);
+      background: var(--white);
+      border-color: var(--accent-blue);
+    }
+
+    .project h3 {
+      color: var(--primary-blue);
+      font-size: 1.6rem;
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .project h3 a {
+      color: inherit;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .project h3 a::after {
+      content: '↗';
+      opacity: 0;
+      transform: translateX(-10px);
+      transition: all 0.3s ease;
+    }
+
+    .project h3 a:hover {
+      color: var(--secondary-blue);
+    }
+
+    .project h3 a:hover::after {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .project-item {
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      background: var(--white);
+      border-radius: 16px;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s ease;
+    }
+
+    .project-item:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .project-title {
+      font-weight: 700;
+      color: var(--medium-gray);
+      margin-bottom: 0.8rem;
+      font-size: 1.1rem;
+    }
+
+    .project-description {
+      color: var(--light-gray);
+      line-height: 1.8;
+      font-size: 1rem;
+    }
+
+    /* Enhanced Skills */
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 2rem;
+    }
+
+    .skill-tag {
+      background: var(--light-blue);
+      color: var(--primary-blue);
+      padding: 0.6rem 1.2rem;
+      border-radius: 25px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skill-tag::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: var(--gradient-primary);
+      transition: all 0.3s ease;
+      z-index: -1;
+    }
+
+    .skill-tag:hover {
+      color: var(--white);
+      transform: translateY(-2px);
+    }
+
+    .skill-tag:hover::before {
+      left: 0;
+    }
+
+    /* Enhanced Contact Section */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 2rem;
+      background: linear-gradient(135deg, var(--background-light) 0%, #f8fafc 100%);
+      border-radius: 20px;
+      transition: all 0.4s ease;
+      border: 1px solid var(--border-color);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--gradient-primary);
+      opacity: 0;
+      transition: all 0.3s ease;
+      z-index: -1;
+    }
+
+    .contact-item:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-xl);
+      color: var(--white);
+    }
+
+    .contact-item:hover::before {
+      opacity: 1;
+    }
+
+    .contact-icon {
+      width: 60px;
+      height: 60px;
+      background: var(--gradient-primary);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .contact-item:hover .contact-icon {
+      background: rgba(255,255,255,0.2);
+      transform: scale(1.1);
+    }
+
+    .contact-info h4 {
+      color: var(--medium-gray);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    .contact-item:hover .contact-info h4 {
+      color: var(--white);
+    }
+
+    .contact-info a {
+      color: var(--primary-blue);
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .contact-item:hover .contact-info a {
+      color: var(--white);
+    }
+
+    /* Enhanced Footer */
+    footer {
+      background: var(--gradient-primary);
+      color: var(--white);
+      text-align: center;
+      padding: 3rem 2rem;
+      margin-top: 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at 30% 40%, rgba(255,255,255,0.1) 0%, transparent 50%),
+        radial-gradient(circle at 70% 60%, rgba(255,255,255,0.1) 0%, transparent 50%);
+    }
+
+    /* Animations */
+    @keyframes slideInFromTop {
+      from {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideInFromRight {
+      from {
+        opacity: 0;
+        transform: translateX(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes slideInFromBottom {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Progress Bar */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 4px;
+      background: var(--gradient-primary);
+      z-index: 1000;
+      transition: width 0.1s ease;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      h1 { font-size: 2.5rem; }
+      .profile-section { 
+        flex-direction: column; 
+        text-align: center;
+        gap: 2rem;
+      }
+      .profile-image {
+        width: 120px;
+        height: 120px;
+        font-size: 3rem;
+      }
+      nav .nav-container { 
+        flex-direction: column; 
+        gap: 0.5rem;
+      }
+      nav a {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+      }
+      main { padding: 3rem 1rem; }
+      .section-header, .section-content { padding: 2rem 1.5rem; }
+      .project { padding: 2rem 1.5rem; }
+      h2 { font-size: 2rem; }
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Smooth scrolling */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Back to top button */
+    .back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 50px;
+      height: 50px;
+      background: var(--gradient-primary);
+      color: var(--white);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.2rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .back-to-top:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+    }
   </style>
 </head>
 <body>
+  <div class="progress-bar"></div>
+  
+  <div class="particles"></div>
+
   <header>
-    <h1>Ada Huang</h1>
-    <p>PMP, BCom | Development Manager | Affordable & Indigenous Housing Specialist</p>
+    <div class="content">
+      <div class="profile-section">
+        <div class="profile-image">AH</div>
+        <div>
+          <h1>Ada Huang</h1>
+          <p class="subtitle">PMP, BCom | Development Manager</p>
+        </div>
+      </div>
+      <p class="header-description">Affordable & Indigenous Housing Specialist with 5+ years of experience advancing equitable housing solutions across British Columbia</p>
+    
+    </div>
   </header>
 
-  <nav>
-    <a href="#about">About</a>
-    <a href="#projects">Projects</a>
-    <a href="#volunteer">Volunteer</a>
-    <a href="#education">Education</a>
-    <a href="#contact">Contact</a>
+  <nav id="navbar">
+    <div class="nav-container">
+      <a href="#about" class="nav-link">About</a>
+      <a href="#projects" class="nav-link">Projects</a>
+      <a href="#volunteer" class="nav-link">Leadership</a>
+      <a href="#education" class="nav-link">Education</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </div>
   </nav>
 
-  <section id="about">
-    <h2>About Me</h2>
-    <p>I am a PMP-certified real estate development professional based in Vancouver, BC, with 5+ years of experience advancing Indigenous- and non-profit-led housing across the Lower Mainland and Vancouver Island. I lead projects from feasibility through pre-construction, blending financial rigour with community-first planning. Passionate about equitable housing solutions, I bring proven success in complex stakeholder engagement, government funding, and cross-sector collaboration.</p>
-  </section>
+  <main>
+    <section id="about">
+      <div class="section-header">
+        <h2>
+          <div class="section-icon">👤</div>
+          About Me
+        </h2>
+        <p class="section-subtitle">Passionate about equitable housing solutions</p>
+      </div>
+      <div class="section-content">
+        <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 2rem;">I am a PMP-certified real estate development professional based in Vancouver, BC, with 5+ years of experience advancing Indigenous- and non-profit-led housing across the Lower Mainland and Vancouver Island. I lead projects from feasibility through pre-construction, blending financial rigour with community-first planning.</p>
+        
+        <div class="skills">
+          <span class="skill-tag">Project Management</span>
+          <span class="skill-tag">Stakeholder Engagement</span>
+          <span class="skill-tag">Financial Modeling</span>
+          <span class="skill-tag">BC Housing Programs</span>
+          <span class="skill-tag">Community Housing Fund</span>
+          <span class="skill-tag">Indigenous Housing Fund</span>
+          <span class="skill-tag">BC Builds</span>
+          <span class="skill-tag">Tenant Relocation Planning</span>
+          <span class="skill-tag">Government Funding</span>
+          <span class="skill-tag">Indigenous Housing</span>
+          <span class="skill-tag">Affordable Housing</span>
+          <span class="skill-tag">CMHC Compliance</span>
+          <span class="skill-tag">Feasibility Analysis</span>
+        </div>
+      </div>
+    </section>
 
-  <section id="projects">
-    <h2>Project Experience</h2>
+    <section id="projects">
+      <div class="section-header">
+        <h2>
+          <div class="section-icon">🏗️</div>
+          Project Experience
+        </h2>
+        <p class="section-subtitle">Leading transformational housing developments</p>
+      </div>
+      <div class="section-content">
+        <div class="project">
+          <h3><a href="https://sacredwaters.ca/projects-2/" target="_blank">Sacred Waters Development</a></h3>
+          
+          <div class="project-item">
+            <div class="project-title">Four-Tower Development, Langley BC</div>
+            <div class="project-description">Lead development management for an Indigenous-owned, 1,600-unit, mixed-tenure community at Lot 27 – 86th Avenue in Langley. Coordinated rezoning, consultant teams, and public funding through BC Builds program; delivered a transit-oriented masterplan with 40% family-oriented housing and Indigenous-led design and amenities.</div>
+          </div>
 
-    <div class="project">
-      <h3><a href="https://sacredwaters.ca/projects-2/" target="_blank">Sacred Waters Development</a></h3>
-      <p><strong>Four-Tower Development, Langley BC</strong><br>
-      Lead development management for an Indigenous-owned, 1,600-unit, mixed-tenure community at Lot 27 – 86th Avenue in Langley. Coordinated rezoning, consultant teams, and public funding; delivered a transit-oriented masterplan with 40% family-oriented housing and Indigenous-led design and amenities.</p>
-      <p><strong>FRAFCA Residential Development, Surrey BC</strong><br>
-      Development consultant for Fraser Region Aboriginal Friendship Centre Association, overseeing offsite/onsite infrastructure and culturally grounded design. Project supports deeply affordable Indigenous housing in a high-need urban neighbourhood.</p>
-    </div>
+          <div class="project-item">
+            <div class="project-title">FRAFCA Residential Development, Surrey BC</div>
+            <div class="project-description">Development consultant for Fraser Region Aboriginal Friendship Centre Association, overseeing offsite/onsite infrastructure and culturally grounded design. Coordinated Community Housing Fund (CHF) and Indigenous Housing Fund (IHF) applications and compliance. Project supports deeply affordable Indigenous housing in a high-need urban neighbourhood.</div>
+          </div>
+        </div>
 
-    <div class="project">
-      <h3><a href="https://www.arpeg.com/developments-portfolio" target="_blank">Arpeg Group</a></h3>
-      <p><strong>Fairfield SRO Redevelopment</strong><br>
-      Supported redevelopment of historic SRO into revitalized affordable housing. Assisted with design, CMHC compliance, and financial reporting.</p>
-      <p><strong>And-Co, Vancouver BC</strong><br>
-      Supported pre-development and financing of BC’s first WELL Platinum-certified commercial building. Managed investor pro formas, municipal approvals, and coordinated with CMHC on MLI Select program eligibility.</p>
-    </div>
+        <div class="project">
+          <h3><a href="https://www.arpeg.com/developments-portfolio" target="_blank">Arpeg Group</a></h3>
+          
+          <div class="project-item">
+            <div class="project-title">Fairfield SRO Redevelopment</div>
+            <div class="project-description">Supported redevelopment of historic SRO into revitalized affordable housing. Assisted with design, CMHC compliance, financial reporting, and coordinated with CMHC on MLI Select program eligibility.</div>
+          </div>
 
-    <div class="project">
-      <h3><a href="https://www.doxadevelopment.com/projects/" target="_blank">Doxa Development</a></h3>
-      <p>Single Family Houses; Duplexes and Townhouses<br>
-      Assisted in feasibility analysis and municipal coordination for multifamily housing developments. Provided research, pro forma analysis, and support for land acquisition and entitlement strategies.</p>
-    </div>
+          <div class="project-item">
+            <div class="project-title">Comox Redevelopment</div>
+            <div class="project-description">Managed redevelopment project including comprehensive tenant relocation planning to ensure minimal disruption during construction. Coordinated relocation logistics, communication strategies, and support services for existing residents.</div>
+          </div>
 
-  </section>
+          <div class="project-item">
+            <div class="project-title">Douglas and Fort Redevelopment</div>
+            <div class="project-description">Led redevelopment planning and tenant relocation coordination for mixed-use affordable housing project. Developed and implemented tenant relocation plan with focus on maintaining community connections and minimizing displacement impacts.</div>
+          </div>
 
-  <section id="volunteer">
-    <h2>Volunteer Experience</h2>
+          <div class="project-item">
+            <div class="project-title">And-Co, Vancouver BC</div>
+            <div class="project-description">Supported pre-development and financing of BC's first WELL Platinum-certified commercial building. Managed investor pro formas and municipal approvals.</div>
+          </div>
+        </div>
 
-    <div class="project">
-      <h3>ULI x BCIT NEXT Program</h3>
-      <p>Selected participant in a professional development program connecting emerging talent with industry leaders. Engaged in cross-sector discussions on innovation, housing affordability, and sustainable urban development.</p>
-    </div>
+        <div class="project">
+          <h3><a href="https://www.doxadevelopment.com/projects/" target="_blank">Doxa Development</a></h3>
+          <div class="project-item">
+            <div class="project-title">Multi-Family Housing Developments</div>
+            <div class="project-description">Assisted in feasibility analysis and municipal coordination for single family houses, duplexes and townhouses. Provided research, pro forma analysis, and support for land acquisition and entitlement strategies.</div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <div class="project">
-      <h3>UDI Mentorship Program</h3>
-      <p>Active mentee in a formalized mentorship program offered by the Urban Development Institute. Participated in curated events and one-on-one sessions to strengthen industry knowledge, networking, and leadership skills.</p>
-    </div>
-  </section>
+    <section id="volunteer">
+      <div class="section-header">
+        <h2>
+          <div class="section-icon">🚀</div>
+          Leadership & Development
+        </h2>
+        <p class="section-subtitle">Committed to professional growth and industry advancement</p>
+      </div>
+      <div class="section-content">
+        <div class="project">
+          <h3>ULI x BCIT NEXT Program</h3>
+          <p style="font-size: 1.1rem; line-height: 1.8;">Selected participant in a professional development program connecting emerging talent with industry leaders. Engaged in cross-sector discussions on innovation, housing affordability, and sustainable urban development.</p>
+        </div>
 
-  <section id="education">
-    <h2>Education</h2>
+        <div class="project">
+          <h3>UDI Mentorship Program</h3>
+          <p style="font-size: 1.1rem; line-height: 1.8;">Active mentee in a formalized mentorship program offered by the Urban Development Institute. Participated in curated events and one-on-one sessions to strengthen industry knowledge, networking, and leadership skills.</p>
+        </div>
+      </div>
+    </section>
 
-    <div class="project">
-      <h3>University of British Columbia (UBC)</h3>
-      <p><strong>Bachelor of Commerce (BCom), Real Estate</strong><br>
-      Completed coursework in urban economics, development feasibility, and real estate finance. Developed a strong foundation in market analysis, strategic planning, and financial modeling.</p>
-    </div>
+    <section id="education">
+      <div class="section-header">
+        <h2>
+          <div class="section-icon">🎓</div>
+          Education & Certifications
+        </h2>
+        <p class="section-subtitle">Strong foundation in real estate and project management</p>
+      </div>
+      <div class="section-content">
+        <div class="project">
+          <h3>University of British Columbia (UBC)</h3>
+          <div class="project-item">
+            <div class="project-title">Bachelor of Commerce (BCom), Business Technology Management</div>
+            <div class="project-description">Completed coursework in business technology integration, systems analysis, and strategic planning. Developed strong foundation in data-driven decision making, process optimization, and technology solutions for business challenges.</div>
+          </div>
+          <div class="project-item">
+            <div class="project-title">Diploma in Urban Land Economics (DULE) - In Progress</div>
+            <div class="project-description">Currently pursuing advanced coursework in urban economics, development feasibility, real estate finance, and market analysis. Strengthening expertise in financial modeling and strategic planning for real estate development.</div>
+          </div>
+        </div>
 
-    <div class="project">
-      <h3>Project Management Institute</h3>
-      <p><strong>Project Management Professional (PMP)</strong><br>
-      Certified PMP with formal training in risk management, scheduling, and stakeholder engagement aligned with global PMBOK standards.</p>
-    </div>
-  </section>
+        <div class="project">
+          <h3>Project Management Institute</h3>
+          <div class="project-item">
+            <div class="project-title">Project Management Professional (PMP)</div>
+            <div class="project-description">Certified PMP with formal training in risk management, scheduling, and stakeholder engagement aligned with global PMBOK standards.</div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>Email: <a href="mailto:adahuang2020@outlook.com">adahuang2020@outlook.com</a><br>
-    LinkedIn: <a href="https://www.linkedin.com/in/adahuang2020/" target="_blank">linkedin.com/in/adahuang2020</a></p>
-  </section>
+    <section id="contact">
+      <div class="section-header">
+        <h2>
+          <div class="section-icon">📧</div>
+          Get In Touch
+        </h2>
+        <p class="section-subtitle">Let's discuss your next development project</p>
+      </div>
+      <div class="section-content">
+        <div class="contact-grid">
+          <div class="contact-item">
+            <div class="contact-icon">✉</div>
+            <div class="contact-info">
+              <h4>Email</h4>
+              <a href="mailto:adahuang2020@outlook.com">adahuang2020@outlook.com</a>
+            </div>
+          </div>
+          
+          <div class="contact-item">
+            <div class="contact-icon">🔗</div>
+            <div class="contact-info">
+              <h4>LinkedIn</h4>
+              <a href="https://www.linkedin.com/in/adahuang2020/" target="_blank">linkedin.com/in/adahuang2020</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <footer>
-    &copy; 2025 Ada Huang. All rights reserved.
+    <div style="position: relative; z-index: 1;">
+      <p style="font-size: 1.1rem; margin-bottom: 0.5rem;">&copy; 2025 Ada Huang. All rights reserved.</p>
+      <p style="opacity: 0.8;">Building equitable communities across British Columbia</p>
+    </div>
   </footer>
+
+  <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+    ↑
+  </button>
+
+  <script>
+    // Floating particles animation
+    function createParticles() {
+      const particlesContainer = document.querySelector('.particles');
+      const particleCount = 50;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 20 + 's';
+        particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+        particlesContainer.appendChild(particle);
+      }
+    }
+
+    // Progress bar
+    function updateProgressBar() {
+      const progressBar = document.querySelector('.progress-bar');
+      const scrollTop = window.pageYOffset;
+      const docHeight = document.body.scrollHeight - window.innerHeight;
+      const scrollPercent = (scrollTop / docHeight) * 100;
+      progressBar.style.width = scrollPercent + '%';
+    }
+
+    // Intersection Observer for section animations
+    function observeSections() {
+      const sections = document.querySelectorAll('section');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -10% 0px'
+      });
+
+      sections.forEach(section => {
+        observer.observe(section);
+      });
+    }
+
+    // Active navigation link
+    function updateActiveNavLink() {
+      const sections = document.querySelectorAll('section');
+      const navLinks = document.querySelectorAll('.nav-link');
+      
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        if (window.pageYOffset >= sectionTop) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + current) {
+          link.classList.add('active');
+        }
+      });
+    }
+
+    // Back to top button visibility
+    function toggleBackToTop() {
+      const backToTop = document.querySelector('.back-to-top');
+      if (window.pageYOffset > 300) {
+        backToTop.classList.add('visible');
+      } else {
+        backToTop.classList.remove('visible');
+      }
+    }
+
+    // Navbar scroll effect
+    function handleNavbarScroll() {
+      const navbar = document.getElementById('navbar');
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    }
+
+    // Smooth scroll for navigation links
+    function setupSmoothScroll() {
+      const navLinks = document.querySelectorAll('.nav-link');
+      navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetId = link.getAttribute('href');
+          const targetSection = document.querySelector(targetId);
+          if (targetSection) {
+            const offsetTop = targetSection.offsetTop - 80;
+            window.scrollTo({
+              top: offsetTop,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+    }
+
+    // Initialize everything when DOM is loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      createParticles();
+      observeSections();
+      setupSmoothScroll();
+      
+      // Set up scroll event listeners
+      window.addEventListener('scroll', function() {
+        updateProgressBar();
+        updateActiveNavLink();
+        toggleBackToTop();
+        handleNavbarScroll();
+      });
+      
+      // Initial calls
+      updateProgressBar();
+      updateActiveNavLink();
+      toggleBackToTop();
+      handleNavbarScroll();
+    });
+
+    // Add hover effects for project items
+    document.addEventListener('DOMContentLoaded', function() {
+      const projectItems = document.querySelectorAll('.project-item');
+      projectItems.forEach(item => {
+        item.addEventListener('mouseenter', function() {
+          this.style.transform = 'translateY(-4px) scale(1.02)';
+        });
+        
+        item.addEventListener('mouseleave', function() {
+          this.style.transform = 'translateY(-2px) scale(1)';
+        });
+      });
+    });
+
+    // Add click animation to skill tags
+    document.addEventListener('DOMContentLoaded', function() {
+      const skillTags = document.querySelectorAll('.skill-tag');
+      skillTags.forEach(tag => {
+        tag.addEventListener('click', function() {
+          this.style.transform = 'scale(0.95)';
+          setTimeout(() => {
+            this.style.transform = 'translateY(-2px)';
+          }, 150);
+        });
+      });
+    });
+
+    // Contact item pulse effect
+    document.addEventListener('DOMContentLoaded', function() {
+      const contactItems = document.querySelectorAll('.contact-item');
+      contactItems.forEach((item, index) => {
+        setTimeout(() => {
+          item.style.animation = 'pulse 0.6s ease-in-out';
+        }, index * 200);
+      });
+    });
+
+    // Add pulse animation
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
 </body>
 </html>
